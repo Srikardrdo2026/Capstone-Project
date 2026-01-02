@@ -52,8 +52,9 @@ Database Schema
 Tables:
 raw_logs, features, results (Phase 4)
 
-Project Structure
------------------
+## Project Structure
+
+```text
 backend/
 │
 ├── app.py                  # Application entry point
@@ -77,6 +78,7 @@ backend/
 │   └── app.db              # SQLite database file
 │
 └── README.md
+```
 
 How to Run
 ---------
@@ -108,16 +110,16 @@ Verification of Available API Endpoints (Phase 1–3).
 -> Health Check - GET /health
 
 Response
-
+```text
 {
   "status": "OK",
   "message": "Backend is running"
 }
-
+```
 -> Upload Raw Logs - POST /api/logs
 
 Sample Body
-
+```text
 {
   "user": "anonymous",
   "protocol": "SSH",
@@ -125,11 +127,11 @@ Sample Body
   "commands": ["ls", "cd", "sudo"],
   "session_duration": 120
 }
-
+```
 -> Extract Behavioral Features - POST /api/extract-features
 
 Response
-
+```text
 {
   "message": "Behavioral features extracted successfully",
   "features": {
@@ -140,11 +142,11 @@ Response
     "protocol_encoded": 1
   }
 }
-
+```
 -> Analytics & Insights - GET /api/analytics
 
 Response
-
+```text
 {
   "total_records": 10,
   "average_session_duration": 95.4,
@@ -152,17 +154,17 @@ Response
   "login_hour_distribution": [...],
   "protocol_distribution": [...]
 }
-
+```
 Database Verification
 ---------------------
 To verify the database is working:
-
+```text
 import sqlite3
 conn = sqlite3.connect("instance/app.db")
 cursor = conn.cursor()
 cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
 print(cursor.fetchall())
-
+```
 Expected tables: raw_logs, features, results
 
 Future Enhancements
