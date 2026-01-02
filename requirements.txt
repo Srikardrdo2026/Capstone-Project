@@ -1,0 +1,19 @@
+# Backend Framework
+Flask==3.0.0
+
+# Data Handling & Processing
+pandas==2.2.0
+numpy==1.26.0
+
+# Machine Learning (Inference Only)
+scikit-learn==1.3.2
+joblib==1.3.2
+
+# Database
+# SQLite is built into Python, no installation needed
+
+# Visualization & Reporting
+matplotlib==3.8.0
+
+# API Testing / Utilities
+requests==2.31.0
