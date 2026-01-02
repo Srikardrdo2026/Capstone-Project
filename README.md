@@ -9,9 +9,13 @@ While identities may be concealed, behavioral patterns such as access timing, co
 and session characteristics can act as digital fingerprints.
 
 This project focuses on building a backend system that:
+
 • Ingests real-world-like user activity and network logs
+
 • Extracts meaningful behavioral features
+
 • Provides analytical insights
+
 • Prepares the data pipeline for machine-learning–based classification
 
 This document describes the backend implementation up to Phase 3.
@@ -25,32 +29,45 @@ Backend Scope (Current Status)
 -----------------------------
 Implemented (Phase 1–3):
 • Flask backend setup and routing
+
 • SQLite database integration
+
 • JSON log ingestion
+
 • Behavioral feature extraction
+
 • Feature storage
+
 • Analytics APIs
+
 • Fully testable backend without ML dependency
 
 Planned (Phase 4):
 • ML model integration
+
 • Prediction APIs
+
 • CSV upload support
+
 • Input validation
 
 Technology Stack
 ----------------
 Backend: Python 3.11+, Flask 3.0
+
 Data Processing: Pandas, NumPy
+
 Machine Learning (Planned): Scikit-learn, Joblib
+
 Database: SQLite
+
 Visualization: Matplotlib
+
 Tools: VS Code, Git, Postman
 
 Database Schema
 ---------------
-Tables:
-raw_logs, features, results (Phase 4)
+Tables: raw_logs, features, results (Phase 4)
 
 ## Project Structure
 
@@ -86,23 +103,19 @@ Virtual Environment Setup (Recommended)
 
 It is recommended to use a virtual environment to manage project dependencies.
 
-1️⃣ Create a virtual environment
-python -m venv venv
+1️⃣ Create a virtual environment - python -m venv venv
 
-2️⃣ Activate the virtual environment
+2️⃣ Activate the virtual environment:
 
-Windows - venv\Scripts\activate
-Linux / macOS - source venv/bin/activate
+• Windows - venv\Scripts\activate
 
-3️⃣ Install required packages
-pip install -r requirements.txt
+• Linux / macOS - source venv/bin/activate
 
-🚀 Run the Backend
-4️⃣ Start the application
-python app.py
+3️⃣ Install required packages - pip install -r requirements.txt
 
-5️⃣ Access the backend
-http://127.0.0.1:5000
+4️⃣ Start the application - python app.py
+
+5️⃣ Access the backend - http://127.0.0.1:5000
 
 Verification of Available API Endpoints (Phase 1–3). 
 ---------------------------------------------------
@@ -170,7 +183,10 @@ Expected tables: raw_logs, features, results
 Future Enhancements
 -------------------
 • ML-based classification
+
 • CSV ingestion
+
 • Prediction confidence
+
 • Dashboard integration
 
