@@ -18,57 +18,91 @@ The backend is **fully implemented and tested**. The frontend visualization is i
 
 ---
 
+## Live Deployment
+- **Frontend:** https://behavioral-fingerprinting-frontend.onrender.com
+- **Backend:** https://behavioral-fingerprinting-backend.onrender.com
+
+---
+
 ## Tech Stack
 
 ### Backend
+- Python 3.11+
+- Flask 3.0 (REST API)
+- SQLite (persistent storage)
+- Scikit‑learn 1.3.2 (ML inference)
+- Joblib (model loading)
+- Pandas / NumPy (data handling)
 
-- **Python 3.11+**
-- **Flask 3.0** (REST API)
-- **SQLite** (local database)
-- **Scikit-learn 1.3.2** (ML inference)
-- **Joblib** (model loading)
-- **Pandas / NumPy** (data handling)
+### Frontend
+- HTML5, CSS3, JavaScript
+- Chart.js (visualization)
 
-### Testing & Tools
-
+### Tools
+- Git & GitHub
 - Postman (API testing)
-- Git & GitHub (version control)
+- Render (deployment)
 
 ---
 
 ## Project Structure
 
 ```text
-backend/
+Capstone-Project/
 │
-├── app.py                  # Application entry point
-├── config.py               # Configuration settings
-├── requirements.txt
+├── .git/                         # Git metadata (auto-generated)
+├── .gitignore                    # Git ignore rules
+├── README.md                     # Project documentation
 │
-├── routes/
-│   ├── health.py           # Health check endpoint
-│   ├── logs.py             # Raw log ingestion
-│   ├── predict.py          # Single prediction API
-│   ├── predict_csv.py      # Batch CSV prediction API
-│   ├── analyze_website.py  # Simulated website analysis
-│   ├── analytics.py        # Prediction-based analytics
-│   └── results.py          # Fetch stored predictions
+├── Backend/                      # Backend (Flask + ML + Database)
+│   │
+│   ├── app.py                    # Flask application entry point
+│   ├── config.py                 # Configuration settings
+│   ├── requirements.txt          # Backend dependencies
+│   │
+│   ├── database/                 # Database handling
+│   │   └── db.py                 # SQLite connection & schema
+│   │
+│   ├── instance/                 # Runtime-generated files
+│   │   ├── .gitkeep              # Keeps folder in Git
+│   │   └── app.db                # SQLite database (ignored in Git)
+│   │
+│   ├── models/                   # Trained ML artifacts
+│   │   ├── behavior_model.pkl    # Trained ML classification model
+│   │   └── protocol_encoder.pkl  # Saved protocol encoder
+│   │
+│   ├── routes/                   # REST API routes
+│   │   ├── health.py             # Health check endpoint
+│   │   ├── predict.py            # Single Scan prediction API
+│   │   ├── predict_csv.py        # CSV batch prediction API
+│   │   ├── analyze_website.py    # Website behavior simulation API
+│   │   ├── analytics.py          # Aggregated analytics API
+│   │   └── results.py            # Stored prediction results API
+│   │
+│   ├── services/                 # Core backend logic
+│   │   ├── preprocessing.py      # Feature extraction logic
+│   │   └── predictor.py          # ML model inference logic
+│   │
+│   ├── Tests/                    # Backend test scripts (optional)
+│   ├── __pycache__/              # Python cache (ignored)
+│   ├── venv/                     # Virtual environment (ignored)
+│   └── .vscode/                  # Editor settings (ignored)
 │
-├── services/
-│   ├── preprocessing.py    # Behavioral feature extraction
-│   └── predictor.py        # ML model + encoder inference
-│
-├── models/
-│   ├── behavior_model.pkl  # Trained ML model
-│   └── protocol_encoder.pkl# Saved protocol encoder
-│
-├── database/
-│   └── db.py               # SQLite connection & schema
-│
-├── instance/
-│   └── app.db              # SQLite database file
-│
-└── README.md
+└── frontend/                     # Frontend (Static Web Application)
+    │
+    ├── index.html                # Single Scan UI
+    ├── analysis.html             # Website Analysis UI (Pie Chart)
+    ├── csv.html                  # CSV Batch Upload UI
+    │
+    ├── css/
+    │   └── style.css             # Global frontend styles
+    │
+    └── js/
+        ├── particles.js          # Background particle animation
+        ├── predict.js            # Single Scan frontend logic
+        ├── analysis.js           # Website Analysis + chart logic
+        └── csv.js                # CSV batch frontend logic
+
 ```
 
 ---
@@ -96,7 +130,22 @@ backend/
 - `GET /api/results` – View stored prediction results
 
 ---
+## Single Scan – Input Specification (Frontend)
 
+The **Single Scan** feature collects session‑level behavioral attributes and submits them to the backend for classification.
+
+### Input Fields
+
+| Field | Type | Range / Options | Description | Example |
+|-----|-----|----------------|-------------|---------|
+| Login Hour | Number | 0–23 | Hour of login | 14 |
+| Session Duration | Number | ≥ 0 | Session length (minutes) | 45 |
+| Number of Commands | Number | ≥ 0 | Commands executed | 20 |
+| Failed Login Attempts | Number | ≥ 0 | Failed attempts | 1 |
+| Protocol Used | Select | HTTPS, SSH, FTP, TOR | Network protocol | SSH |
+| Typing Speed | Number | ≥ 0 | Words per minute | 55 |
+
+---
 ## Database Design
 
 ### Results Table (Source of Truth)
@@ -326,74 +375,21 @@ LoginHour,SessionDuration,CommandsCount,FailedLogins,Protocol,TypingSpeed
 
 ---
 
+
+## Deployment
+
+### Backend
+- Deployed on Render as a Web Service
+- Flask bound to dynamic port
+- SQLite DB created at runtime
+
+### Frontend
+- Deployed on Render as a Static Site
+- Consumes backend APIs over HTTPS
+
+---
+
 ## Conclusion
 
-If all above tests pass:
-- Backend APIs are functioning correctly
-- ML integration is verified
-- Database storage is validated
-- System is ready for frontend integration
+The project delivers a **production‑ready behavioral fingerprinting system** with ML inference, persistent storage, interactive visualization, and cloud deployment. It demonstrates practical application of machine learning in cybersecurity.
 
----
-
-## Frontend Integration (Next Phase)
-
-### Frontend Responsibilities
-
-- Consume backend APIs only
-- No ML logic on frontend
-- No direct database access
-- Visualization only
-
-### Required API
-
-- `POST /api/analyze-website`
-
-Frontend should use the following response fields:
-
-- `normal_percent`
-- `suspicious_percent`
-
-### Visualization
-
-- Pie chart showing:
-  - 🟢 Normal users (%)
-  - 🔴 Suspicious users (%)
-- Implemented using **Chart.js** with simple HTML & JavaScript
-
-> Note: Backend already computes all statistics. Frontend must not perform calculations.
-
----
-
-## Deployment (Optional)
-
-For academic or low-traffic deployment:
-
-- Deploy Flask backend on Render / Railway / AWS EC2
-- Use SQLite (`app.db`) on the server
-
-For production environments (future scope):
-
-- Replace SQLite with PostgreSQL
-- Add authentication and streaming log ingestion
-
----
-
-## After Frontend Completion
-
-- Integrate frontend with backend APIs
-- Validate chart output against backend responses
-- Capture screenshots for demo/report
-- (Optional) Deploy backend if required
-
----
-
-## Notes
-
-- Feature extraction tables used during early development have been retired.
-- Feature extraction is now an internal backend step.
-- The system follows a clean separation of concerns between backend, ML, and frontend.
-
----
-
-##
