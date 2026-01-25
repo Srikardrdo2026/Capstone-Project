@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cyber Behavior Scanner</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+<canvas id="particles"></canvas>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav">
+  <a href="index.html">Single Scan</a>
+  <a href="analysis.html">Website Analysis</a>
+  <a href="csv.html">CSV Batch</a>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <h1>Cyber Behavior Scanner</h1>
+    <div class="subtitle">Detect anomalous user behavior patterns</div>
+  </div>
+
+  <div class="form-section">
+
+    <div class="field">
+      <label>Login Hour (0–23)</label>
+      <input type="number" id="login_hour" min="0" max="23" required>
+    </div>
+
+    <div class="field">
+      <label>Session Duration (minutes)</label>
+      <input type="number" id="session_duration" min="0" required>
+    </div>
+
+    <div class="field">
+      <label>Number of Commands</label>
+      <input type="number" id="commands" min="0" required>
+    </div>
+
+    <div class="field">
+      <label>Failed Login Attempts</label>
+      <input type="number" id="failed_logins" min="0" required>
+    </div>
+
+    <div class="field">
+      <label>Protocol Used</label>
+      <select id="protocol">
+        <option value="HTTPS">HTTPS</option>
+        <option value="SSH">SSH</option>
+        <option value="FTP">FTP</option>
+        <option value="TOR">TOR (Anonymity Network)</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Typing Speed (WPM)</label>
+      <input type="number" id="typing_speed" min="0" required>
+    </div>
+
+    <button id="scanBtn" onclick="analyzeUser()">Run Security Scan</button>
+
+    <!-- LOADING -->
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <div class="loader-text">Analyzing user behavior...</div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result"></div>
+
+    <!-- ERROR -->
+    <div id="errorBox" class="error"></div>
+
+  </div>
+</div>
+
+<script src="js/particles.js"></script>
+<script src="js/predict.js"></script>
+
+</body>
+</html>

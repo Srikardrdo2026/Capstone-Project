@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSV Batch Prediction</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+<canvas id="particles"></canvas>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav">
+  <a href="index.html">Single Scan</a>
+  <a href="analysis.html">Website Analysis</a>
+  <a href="csv.html">CSV Batch</a>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <h1>CSV Batch Prediction</h1>
+    <div class="subtitle">Bulk behavioral analysis via CSV</div>
+  </div>
+
+  <div class="form-section">
+
+    <div class="field">
+      <label>Select CSV File</label>
+      <input type="file" id="csvFile" accept=".csv">
+    </div>
+
+    <button onclick="uploadCSV()">Upload & Analyze</button>
+
+    <!-- RESULT -->
+    <div id="result"></div>
+
+    <!-- ERROR -->
+    <div id="errorBox" class="error"></div>
+
+  </div>
+</div>
+
+<script src="js/particles.js"></script>
+<script src="js/csv.js"></script>
+
+</body>
+</html>

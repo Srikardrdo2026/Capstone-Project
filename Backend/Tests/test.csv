@@ -1,0 +1,4 @@
+LoginHour,SessionDuration,CommandsCount,FailedLogins,Protocol,TypingSpeed
+9,40,10,0,HTTPS,45
+2,5,80,4,TOR,120
+14,30,5,0,HTTPS,35
