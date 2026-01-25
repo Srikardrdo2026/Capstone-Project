@@ -14,14 +14,19 @@ async function analyzeWebsite() {
   }
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/analyze-website", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        website: website,
-        num_users: numUsers
-      })
-    });
+    const res = await fetch(
+      "https://behavioral-fingerprinting-backend.onrender.com/api/analyze-website",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          website: website,
+          num_users: numUsers
+        })
+      }
+    );
+
+    if (!res.ok) throw new Error("Server error");
 
     const data = await res.json();
 
@@ -43,14 +48,10 @@ async function analyzeWebsite() {
       options: {
         responsive: true,
         plugins: {
-          legend: {
-            position: "bottom"
-          },
+          legend: { position: "bottom" },
           tooltip: {
             callbacks: {
-              label: function (context) {
-                return `${context.label}: ${context.raw}%`;
-              }
+              label: (context) => `${context.label}: ${context.raw}%`
             }
           }
         }

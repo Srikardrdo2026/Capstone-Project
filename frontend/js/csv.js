@@ -3,11 +3,9 @@ async function uploadCSV() {
   const resultBox = document.getElementById("result");
   const errorBox = document.getElementById("errorBox");
 
-  // Reset UI
   errorBox.style.display = "none";
   resultBox.style.display = "none";
 
-  // Validation
   if (!fileInput.files.length) {
     errorBox.innerText = "⚠️ Please select a CSV file before uploading";
     errorBox.style.display = "block";
@@ -18,14 +16,15 @@ async function uploadCSV() {
   formData.append("file", fileInput.files[0]);
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/predict-csv", {
-      method: "POST",
-      body: formData
-    });
+    const res = await fetch(
+      "https://behavioral-fingerprinting-backend.onrender.com/api/predict-csv",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
 
-    if (!res.ok) {
-      throw new Error("Server error");
-    }
+    if (!res.ok) throw new Error("Server error");
 
     const data = await res.json();
 
@@ -38,7 +37,7 @@ async function uploadCSV() {
     `;
     resultBox.style.display = "block";
 
-  } catch (err) {
+  } catch {
     errorBox.innerText = "❌ Backend not reachable or error occurred";
     errorBox.style.display = "block";
   }
