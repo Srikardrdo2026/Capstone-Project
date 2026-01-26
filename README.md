@@ -14,7 +14,7 @@ The backend is **fully implemented and tested**. The frontend visualization is i
 - Extract behavioral fingerprints from raw logs.
 - Classify users as *Normal* or *Suspicious* using a trained ML model.
 - Store predictions and provide analytics via APIs.
-- Support real-time, batch (CSV), and simulated website analysis.
+- Support real-time, batch (CSV)
 
 ---
 
@@ -36,7 +36,6 @@ The backend is **fully implemented and tested**. The frontend visualization is i
 
 ### Frontend
 - HTML5, CSS3, JavaScript
-- Chart.js (visualization)
 
 ### Tools
 - Git & GitHub
@@ -75,7 +74,6 @@ Capstone-Project/
 │   │   ├── health.py             # Health check endpoint
 │   │   ├── predict.py            # Single Scan prediction API
 │   │   ├── predict_csv.py        # CSV batch prediction API
-│   │   ├── analyze_website.py    # Website behavior simulation API
 │   │   ├── analytics.py          # Aggregated analytics API
 │   │   └── results.py            # Stored prediction results API
 │   │
@@ -91,7 +89,6 @@ Capstone-Project/
 └── frontend/                     # Frontend (Static Web Application)
     │
     ├── index.html                # Single Scan UI
-    ├── analysis.html             # Website Analysis UI (Pie Chart)
     ├── csv.html                  # CSV Batch Upload UI
     │
     ├── css/
@@ -100,7 +97,6 @@ Capstone-Project/
     └── js/
         ├── particles.js          # Background particle animation
         ├── predict.js            # Single Scan frontend logic
-        ├── analysis.js           # Website Analysis + chart logic
         └── csv.js                # CSV batch frontend logic
 
 ```
@@ -118,11 +114,6 @@ Capstone-Project/
 - `POST /api/predict` – Predict behavior for a single user log
 - `POST /api/predict-csv` – Batch prediction from CSV file
 
-### Website Analysis (Simulated)
-
-- `POST /api/analyze-website`
-  - Simulates multiple user sessions for a given website
-  - Returns percentage of Normal vs Suspicious users
 
 ### Analytics
 
@@ -170,7 +161,6 @@ All predictions (single, CSV, and simulated website users) are stored here.
   - Valid and invalid inputs
   - Single prediction
   - CSV batch prediction
-  - Website simulation
   - Analytics verification
 
 # Testing Guide – Backend API Validation
@@ -306,41 +296,8 @@ LoginHour,SessionDuration,CommandsCount,FailedLogins,Protocol,TypingSpeed
 
 ---
 
-## Test 5: Website Analysis (Simulated)
 
-### Request
-- Method: `POST`
-- URL: `/api/analyze-website`
-- Headers: `Content-Type: application/json`
-
-### Body
-```json
-{
-  "website": "https://example.com",
-  "num_users": 100
-}
-```
-
-### Expected Response
-```json
-{
-  "website": "https://example.com",
-  "total_users": 100,
-  "normal_users": 72,
-  "suspicious_users": 28,
-  "normal_percent": 72.0,
-  "suspicious_percent": 28.0,
-  "note": "Results based on simulated behavioral patterns"
-}
-```
-
-### Purpose
-- Demonstrates large-scale analysis
-- Confirms simulation logic
-
----
-
-## Test 6: Analytics Summary
+## Test 5: Analytics Summary
 
 ### Request
 - Method: `GET`
@@ -363,7 +320,7 @@ LoginHour,SessionDuration,CommandsCount,FailedLogins,Protocol,TypingSpeed
 
 ---
 
-## Test 7: Database Verification
+## Test 6: Database Verification
 
 ### Request
 - Method: `GET`
