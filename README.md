@@ -18,8 +18,17 @@ The backend is **fully implemented and tested**. The frontend visualization is i
 
 ---
 
+
+> Note: For local testing, frontend files can be opened directly in a browser.
+
+> For production usage, use the deployed frontend URL.
+---
+
+
 ## Live Deployment
+
 - **Frontend:** https://behavioral-fingerprinting-frontend.onrender.com
+
 - **Backend:** https://behavioral-fingerprinting-backend.onrender.com
 
 ---
@@ -30,19 +39,30 @@ The backend is **fully implemented and tested**. The frontend visualization is i
 - Python 3.11+
 - Flask 3.0 (REST API)
 - SQLite (persistent storage)
-- Scikit‑learn 1.3.2 (ML inference)
+- Scikit-learn 1.3.2 (ML inference)
 - Joblib (model loading)
 - Pandas / NumPy (data handling)
 
+**Backend Dependencies**
+- Flask
+- flask-cors
+- pandas
+- numpy
+- scikit-learn
+- joblib
+- matplotlib
+- requests
+
+
 ### Frontend
-- HTML5, CSS3, JavaScript
+- HTML5
+- CSS3
+- JavaScript
 
 ### Tools
 - Git & GitHub
 - Postman (API testing)
 - Render (deployment)
-
----
 
 ## Project Structure
 
