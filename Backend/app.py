@@ -10,7 +10,6 @@ from routes.results import results_bp
 from routes.analytics import analytics_bp
 from routes.predict import predict_bp
 from routes.predict_csv import predict_csv_bp
-from routes.analyze_website import analyze_bp
 
 def create_app():
     app = Flask(__name__)
@@ -23,7 +22,6 @@ def create_app():
     app.register_blueprint(logs_bp, url_prefix="/api")
     app.register_blueprint(predict_bp, url_prefix="/api")
     app.register_blueprint(predict_csv_bp, url_prefix="/api")
-    app.register_blueprint(analyze_bp, url_prefix="/api")
     app.register_blueprint(analytics_bp, url_prefix="/api")
     app.register_blueprint(results_bp, url_prefix="/api")
 
