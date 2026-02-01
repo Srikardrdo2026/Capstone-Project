@@ -1,55 +1,40 @@
-# =========================
+# ========================
 # Python
-# =========================
+# ========================
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
 *.pyd
+*.egg-info/
 .env
-.env.*
-
-# =========================
-# Virtual Environments
-# =========================
-venv/
-env/
 .venv/
+venv/
 
-# =========================
-# Flask
-# =========================
-instance/
-!instance/.gitkeep
+# ========================
+# VS Code
+# ========================
+.vscode/
 
-# =========================
-# Database
-# =========================
-*.db
-*.sqlite3
-
-# =========================
-# Machine Learning
-# =========================
-*.joblib
-*.h5
-*.pt
-
-# =========================
-# OS / Editor Files
-# =========================
+# ========================
+# OS files
+# ========================
 .DS_Store
 Thumbs.db
-.vscode/
-.idea/
 
-# =========================
-# Logs
-# =========================
-*.log
+# ========================
+# Backend runtime
+# ========================
+Backend/instance/app.db
 
-# =========================
-# Node / Frontend (if added later)
-# =========================
-node_modules/
-dist/
-build/
+# ========================
+# Training artifacts
+# ========================
+training/behavior_dataset_1M.csv
+training/*.pkl
+
+# ========================
+# Model files (optional ignore if regenerated)
+# Comment these lines if you want to track models
+# ========================
+# Backend/models/behavior_model.pkl
+# Backend/models/protocol_encoder.pkl
