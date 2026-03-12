@@ -4,17 +4,21 @@
 
 This project implements a **backend system for behavioral fingerprinting** to identify and classify user behavior as **Normal** or **Suspicious** using machine learning. The system is designed for cybersecurity use cases such as IoT networks and distributed systems, where attackers may hide behind anonymity and encryption, but still leave identifiable behavioral patterns.
 
-The backend is **fully implemented and tested**. The frontend visualization is intentionally decoupled and assigned as a separate task.
+The project implements a complete **end-to-end system** consisting of:
+- A machine learning–powered backend for prediction
+- A static frontend for user interaction
+- Offline model training
+- Database-backed result storage
 
 ---
 
 ## Objectives
 
-- Study and identify behavioral patterns from user activity or network logs.
-- Extract behavioral fingerprints from raw logs.
-- Classify users as *Normal* or *Suspicious* using a trained ML model.
-- Store predictions and provide analytics via APIs.
-- Support real-time, batch (CSV)
+- Study and identify key behavioral patterns from user activity logs
+- Design a machine learning model to classify behavior as normal or suspicious
+- Build REST APIs to serve predictions
+- Support real-time and batch (CSV) analysis
+- Maintain clean separation between training, backend, and frontend
 
 ---
 
@@ -73,6 +77,10 @@ Capstone-Project/
 ├── .gitignore                    # Git ignore rules
 ├── README.md                     # Project documentation
 │
+├── Training/
+│   ├── train_model.py
+│   └── behavior_dataset.csv
+│
 ├── Backend/                      # Backend (Flask + ML + Database)
 │   │
 │   ├── app.py                    # Flask application entry point
@@ -121,26 +129,61 @@ Capstone-Project/
 
 ```
 
+## Setup Instructions (Local)
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Srikardrdo2026/Capstone-Project.git
+cd Capstone-Project
+```
+
+---
+
+### 2. Backend Setup
+
+```bash
+cd Backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+Backend runs at: `http://127.0.0.1:5000`
+
+---
+
+### 3. Frontend Setup
+
+Open directly in browser:
+
+```
+Frontend/index.html
+```
+
+Or run a local server:
+
+```bash
+python -m http.server
+```
+
+---
+
 ---
 
 ## API Endpoints
 
-### Health
-
-- `GET /health` – Check backend status
-
-### Prediction
-
-- `POST /api/predict` – Predict behavior for a single user log
-- `POST /api/predict-csv` – Batch prediction from CSV file
-
-
-### Analytics
-
-- `GET /api/analytics` – Aggregated prediction statistics
-- `GET /api/results` – View stored prediction results
+| Method | Endpoint | Description |
+|------|---------|------------|
+| GET | /health | Health check |
+| POST | /api/predict | Single behavior scan |
+| POST | /api/predict-csv | CSV batch scan |
+| GET | /api/analytics | Aggregated stats |
+| GET | /api/results | Stored results |
 
 ---
+
 ## Single Scan – Input Specification (Frontend)
 
 The **Single Scan** feature collects session‑level behavioral attributes and submits them to the backend for classification.
@@ -184,23 +227,6 @@ All predictions (single, CSV, and simulated website users) are stored here.
   - Analytics verification
 
 # Testing Guide – Backend API Validation
-
-## Prerequisites
-
-1. Python environment activated
-2. Dependencies installed:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Backend server running:
-   ```bash
-   python app.py
-   ```
-
-Backend should start on:
-```
-http://127.0.0.1:5000
-```
 
 ---
 
@@ -357,16 +383,23 @@ LoginHour,SessionDuration,CommandsCount,FailedLogins,Protocol,TypingSpeed
 
 ### Backend
 - Deployed on Render as a Web Service
-- Flask bound to dynamic port
-- SQLite DB created at runtime
+- SQLite used for lightweight persistence
 
 ### Frontend
 - Deployed on Render as a Static Site
-- Consumes backend APIs over HTTPS
+- Communicates with backend via REST APIs
+
+---
+
+## Notes
+
+- Large generated datasets are excluded from GitHub
+- Training is fully reproducible
+- Backend uses pre-trained models only
+- Clean separation of concerns maintained
 
 ---
 
 ## Conclusion
 
 The project delivers a **production‑ready behavioral fingerprinting system** with ML inference, persistent storage, interactive visualization, and cloud deployment. It demonstrates practical application of machine learning in cybersecurity.
-
