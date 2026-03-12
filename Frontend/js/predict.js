@@ -85,6 +85,9 @@ async function analyzeUser() {
 document.addEventListener("DOMContentLoaded", function() {
   const scanBtn = document.getElementById("scanBtn");
   if (scanBtn) {
-    scanBtn.addEventListener("click", analyzeUser);
+    scanBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        analyzeUser();
+      });
   }
 });
