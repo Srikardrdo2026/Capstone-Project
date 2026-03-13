@@ -4,6 +4,7 @@ async function analyzeUser() {
   const loader = document.getElementById("loader");
   const btn = document.getElementById("scanBtn");
 
+  // Reset UI
   errorBox.style.display = "none";
   resultBox.style.display = "none";
 
@@ -31,6 +32,7 @@ async function analyzeUser() {
     return;
   }
 
+  // Convert command count into dummy array (backend expects array)
   const commandsArray = Array(commandsCount).fill("cmd");
 
   const payload = {
@@ -42,18 +44,16 @@ async function analyzeUser() {
     typing_speed: typingSpeed
   };
 
+  // UI loading state
   btn.disabled = true;
   loader.style.display = "block";
 
   try {
-    const res = await fetch(
-      "https://behavioral-fingerprinting-backend.onrender.com/api/predict",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }
-    );
+    const res = await fetch("http://127.0.0.1:5000/api/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
     if (!res.ok) {
       throw new Error("Server error");
@@ -81,12 +81,10 @@ async function analyzeUser() {
   btn.disabled = false;
 }
 
+// Attach event listener when DOM is loaded
 document.addEventListener("DOMContentLoaded", function() {
   const scanBtn = document.getElementById("scanBtn");
   if (scanBtn) {
-    scanBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      analyzeUser();
-    });
+    scanBtn.addEventListener("click", analyzeUser);
   }
 });
