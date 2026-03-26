@@ -22,21 +22,6 @@ The project implements a complete **end-to-end system** consisting of:
 
 ---
 
-
-> Note: For local testing, frontend files can be opened directly in a browser.
-
-> For production usage, use the deployed frontend URL.
----
-
-
-## Live Deployment
-
-- **Frontend:** https://behavioral-fingerprinting-frontend.onrender.com
-
-- **Backend:** https://behavioral-fingerprinting-backend.onrender.com
-
----
-
 ## Tech Stack
 
 ### Backend
@@ -66,7 +51,6 @@ The project implements a complete **end-to-end system** consisting of:
 ### Tools
 - Git & GitHub
 - Postman (API testing)
-- Render (deployment)
 
 ## Project Structure
 
@@ -77,9 +61,12 @@ Capstone-Project/
 ├── .gitignore                    # Git ignore rules
 ├── README.md                     # Project documentation
 │
-├── Training/
-│   ├── train_model.py
-│   └── behavior_dataset.csv
+Training/
+|   |-- train_model.py            Model training script
+|   |-- behavior_dataset.csv      Base dataset (1800 records)
+|   |-- behavior_dataset_1M.csv   Large dataset (~1M records, excluded from Git)
+|   |-- behavior_model.pkl        Trained ML model
+|   |-- protocol_encoder.pkl      Saved protocol label encoder
 │
 ├── Backend/                      # Backend (Flask + ML + Database)
 │   │
@@ -378,18 +365,6 @@ LoginHour,SessionDuration,CommandsCount,FailedLogins,Protocol,TypingSpeed
 
 ---
 
-
-## Deployment
-
-### Backend
-- Deployed on Render as a Web Service
-- SQLite used for lightweight persistence
-
-### Frontend
-- Deployed on Render as a Static Site
-- Communicates with backend via REST APIs
-
----
 
 ## Notes
 
